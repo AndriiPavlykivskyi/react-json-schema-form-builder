@@ -1,6 +1,6 @@
 # React JSON Schema Form Editor
 
-[![npm](https://img.shields.io/npm/v/@ginkgo-bioworks/react-json-schema-form-builder)](https://www.npmjs.com/package/@ginkgo-bioworks/react-json-schema-form-builder)
+[![npm](https://img.shields.io/npm/v/@AndriiPavlykivskyi/react-json-schema-form-builder)](https://www.npmjs.com/package/@AndriiPavlykivskyi/react-json-schema-form-builder)
 [![CI](https://github.com/ginkgobioworks/react-json-schema-form-builder/workflows/CI/badge.svg?branch=main)](https://github.com/ginkgobioworks/react-json-schema-form-builder/actions)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![GitHub issues](https://img.shields.io/github/issues-raw/ginkgobioworks/react-json-schema-form-builder)](https://github.com/ginkgobioworks/react-json-schema-form-builder/issues)
@@ -12,7 +12,7 @@ This repository contains code for a React JS Component called the `FormBuilder` 
 
 This component is wrapped around a demo app that demonstrates how the tool can be used in conjunction with a code editor and [Mozilla's React JSON schema form viewer](https://github.com/rjsf-team/react-jsonschema-form) to build a form and maintain a live, code representation of it in real time.
 
-The Form Builder is available as an NPM package [here](https://www.npmjs.com/package/@ginkgo-bioworks/react-json-schema-form-builder).
+The Form Builder is available as an NPM package [here](https://www.npmjs.com/package/@AndriiPavlykivskyi/react-json-schema-form-builder).
 
 View the Form Builder in action [here](https://ginkgobioworks.github.io/react-json-schema-form-builder/)
 
@@ -21,7 +21,7 @@ More extensive documentation is available [here](https://react-json-schema-form-
 ## Quickstart
 
 ```bash
-npm i --save @ginkgo-bioworks/react-json-schema-form-builder
+npm i --save @AndriiPavlykivskyi/react-json-schema-form-builder
 ```
 
 Import the tool as a react component and its styles in your Node project:
@@ -31,8 +31,8 @@ Import the tool as a react component and its styles in your Node project:
 ```javascript
 import React, { Component } from 'react';
  
-import {FormBuilder} from '@ginkgo-bioworks/react-json-schema-form-builder';
-import '@ginkgo-bioworks/react-json-schema-form-builder/dist/index.css';
+import {FormBuilder} from '@AndriiPavlykivskyi/react-json-schema-form-builder';
+import '@AndriiPavlykivskyi/react-json-schema-form-builder/dist/index.css';
  
 class Example extends Component {
   constructor(props) {

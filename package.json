@@ -1,5 +1,5 @@
 {
-  "name": "@ginkgo-bioworks/react-json-schema-form-builder",
+  "name": "@AndriiPavlykivskyi/react-json-schema-form-builder",
   "version": "3.0.0",
   "description": "React Component for visually configuring a JSON Schema-based form",
   "author": {

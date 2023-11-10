@@ -102,7 +102,7 @@ JSON Schema forms also make use of definitions, allowing a form builder to defin
 ``` react
 import React, { Component } from 'react';
 
-import {FormBuilder, PredefinedGallery} from "@ginkgo-bioworks/react-json-schema-form-builder";
+import {FormBuilder, PredefinedGallery} from "@AndriiPavlykivskyi/react-json-schema-form-builder";
 
 class Example extends Component {
   constructor(props) {
@@ -148,7 +148,7 @@ The following is an example that implements the `FormBuilder` in a React functio
 ``` react
 import React, { useState } from 'react';
 
-import {FormBuilder, PredefinedGallery} from "@ginkgo-bioworks/react-json-schema-form-builder";
+import {FormBuilder, PredefinedGallery} from "@AndriiPavlykivskyi/react-json-schema-form-builder";
 
 export default function Example() {
   const [schema, setSchema] = useState('{}');
@@ -330,7 +330,7 @@ const mods = {
 You can invoke the following two functions anywhere in your app in order to add form elements and/or sections within the Form Builder component:
 
 ```js
-import { addCardObj, addSectionObj } from '@ginkgo-bioworks/react-json-schema-form-builder';
+import { addCardObj, addSectionObj } from '@AndriiPavlykivskyi/react-json-schema-form-builder';
 ```
 
 Both of these functions require the following properties:
@@ -370,7 +370,7 @@ By providing a custom component through `mods`, you can completely override the 
 To do this, provide a callback function to the `components.add` mod. This callback should expect one argument, which provides properties that are required to add elements and sections to the form builder.
 
 ```js
-import { addCardObj } from '@ginkgo-bioworks/react-json-schema-form-builder';
+import { addCardObj } from '@AndriiPavlykivskyi/react-json-schema-form-builder';
 
 mods = {
   components: {
@@ -383,7 +383,7 @@ Putting it all together, the following snippet is an example showing two fully f
 
 ```js
 import React, { useState } from 'react';
-import { addCardObj, addSectionObj } from '@ginkgo-bioworks/react-json-schema-form-builder';
+import { addCardObj, addSectionObj } from '@AndriiPavlykivskyi/react-json-schema-form-builder';
 
 const mods = {
   //...

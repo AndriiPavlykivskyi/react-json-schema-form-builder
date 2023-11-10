@@ -7,7 +7,7 @@ The Form Builder is available as an NPM package [here](https://www.npmjs.com/pac
 To install the Form Builder into your NodeJS project, open a terminal and type the following:
 
 ```bash
-npm i --save @ginkgo-bioworks/react-json-schema-form-builder
+npm i --save @AndriiPavlykivskyi/react-json-schema-form-builder
 ```
 
 The Form Builder can then be imported as a React component in any ReactJS file as follows:

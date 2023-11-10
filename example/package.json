@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ginkgo-bioworks/react-json-schema-form-builder": "file:..",
+    "@AndriiPavlykivskyi/react-json-schema-form-builder": "file:..",
     "@rjsf/core": "^5.13.6",
     "@rjsf/mui": "^5.13.6",
     "clsx": "^2.0.0",

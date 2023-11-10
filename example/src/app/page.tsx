@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-import { FormBuilder } from '@ginkgo-bioworks/react-json-schema-form-builder';
-import '@ginkgo-bioworks/react-json-schema-form-builder/dist/index.css';
+import { FormBuilder } from '@AndriiPavlykivskyi/react-json-schema-form-builder';
+import '@AndriiPavlykivskyi/react-json-schema-form-builder/dist/index.css';
 
 export default function Home() {
   const [schema, setSchema] = useState('');
