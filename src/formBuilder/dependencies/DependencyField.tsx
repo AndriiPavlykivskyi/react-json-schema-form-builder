@@ -1,13 +1,12 @@
-import React, { useState, ReactElement } from 'react';
-import { UncontrolledTooltip } from 'reactstrap';
+import React, { ReactElement } from 'react';
 import { createUseStyles } from 'react-jss';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import FBRadioGroup from '../radio/FBRadioGroup';
-import Tooltip from '../Tooltip';
+import IconTooltip from '../IconTooltip';
 import DependencyWarning from './DependencyWarning';
 import DependencyPossibility from './DependencyPossibility';
 import FontAwesomeIcon from '../FontAwesomeIcon';
-import { getRandomId } from '../utils';
+import { Tooltip } from '@mui/material';
 
 const useStyles = createUseStyles({
   dependencyField: {
@@ -74,15 +73,15 @@ export default function DependencyField({
   parameters: DependencyParams;
   onChange: (newParams: DependencyParams) => void;
 }): ReactElement {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   const classes = useStyles();
   const valueBased = checkIfValueBasedDependency(parameters.dependents || []);
   return (
     <div className={`form-dependency ${classes.dependencyField}`}>
       <h4>
         Dependencies{' '}
-        <Tooltip
-          id={`${elementId}_dependent`}
+        <IconTooltip
+          id={`${elementId}dependent`}
           type='help'
           text='Control whether other form elements show based on this one'
         />
@@ -102,8 +101,8 @@ export default function DependencyField({
                 label: (
                   <React.Fragment>
                     Specific value dependency{' '}
-                    <Tooltip
-                      id={`${elementId}_valuebased`}
+                    <IconTooltip
+                      id={`${elementId}valuebased`}
                       type='help'
                       text="Specify whether these elements should show based on this element's value"
                     />
@@ -150,7 +149,7 @@ export default function DependencyField({
                 parentName={parameters.name}
                 parentSchema={parameters.schema}
                 path={parameters.path}
-                key={`${elementId}_possibility${index}`}
+                key={`${elementId}possibility${index}`}
                 onChange={(newPossibility: {
                   children: Array<string>;
                   value?: any;
@@ -180,31 +179,30 @@ export default function DependencyField({
             ))
           : ''}
 
-        <span className='plus' id={`${elementId}_adddependency`}>
-          <FontAwesomeIcon
-            icon={faPlus}
-            onClick={() => {
-              const newDependents = parameters.dependents
-                ? [...parameters.dependents]
-                : [];
-              newDependents.push({
-                children: [],
-                value: valueBased ? { enum: [] } : undefined,
-              });
-              onChange({
-                ...parameters,
-                dependents: newDependents,
-              });
-            }}
-          />
-        </span>
-        <UncontrolledTooltip
+        <Tooltip
           placement='top'
-          target={`${elementId}_adddependency`}
+          title={`Add another dependency relation linking this element and other form
+            elements`}
         >
-          Add another dependency relation linking this element and other form
-          elements
-        </UncontrolledTooltip>
+          <span className='plus'>
+            <FontAwesomeIcon
+              icon={faPlus}
+              onClick={() => {
+                const newDependents = parameters.dependents
+                  ? [...parameters.dependents]
+                  : [];
+                newDependents.push({
+                  children: [],
+                  value: valueBased ? { enum: [] } : undefined,
+                });
+                onChange({
+                  ...parameters,
+                  dependents: newDependents,
+                });
+              }}
+            />
+          </span>
+        </Tooltip>
       </div>
     </div>
   );

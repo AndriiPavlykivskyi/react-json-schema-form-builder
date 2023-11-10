@@ -1,6 +1,5 @@
 import React, { useState, ReactElement } from 'react';
-import { getRandomId } from '../utils';
-import Tooltip from '../Tooltip';
+import IconTooltip from '../IconTooltip';
 
 interface DependencyWarningProps {
   parameters: {
@@ -21,7 +20,7 @@ interface DependencyWarningProps {
 export default function DependencyWarning({
   parameters,
 }: DependencyWarningProps): ReactElement | null {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   if (
     parameters.enum &&
     parameters.dependents &&
@@ -45,8 +44,8 @@ export default function DependencyWarning({
         <p>
           Warning! The following values do not have associated dependency
           values:{' '}
-          <Tooltip
-            id={`${elementId}_valuewarning`}
+          <IconTooltip
+            id={`${elementId}valuewarning`}
             type='help'
             text='Each possible value for a value-based dependency must be defined to work properly'
           />

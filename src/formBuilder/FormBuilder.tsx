@@ -1,4 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Alert, Input } from 'reactstrap';
 import { createUseStyles } from 'react-jss';
@@ -199,7 +200,7 @@ export default function FormBuilder({
   onChange: (schema: string, uischema: string) => any;
   mods?: Mods;
   className?: string;
-}): ReactElement {
+}) {
   const classes = useStyles();
   const schemaData = parse(schema);
   schemaData.type = 'object';
@@ -255,7 +256,9 @@ export default function FormBuilder({
   }, [isFirstRender, onMount, categoryHash]);
 
   return (
-    <div className={`${classes.formBuilder} ${className || ''}`}>
+    <div
+      className={` local-bootstrap ${classes.formBuilder} ${className || ''}`}
+    >
       <Alert
         style={{
           display: unsupportedFeatures.length === 0 ? 'none' : 'block',

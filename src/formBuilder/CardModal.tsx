@@ -10,7 +10,7 @@ import {
 import { createUseStyles } from 'react-jss';
 import DependencyField from './dependencies/DependencyField';
 import type { CardModalType, CardComponentPropsType } from './types';
-import Tooltip from './Tooltip';
+import IconTooltip from './IconTooltip';
 
 const useStyles = createUseStyles({
   cardModal: {
@@ -75,7 +75,7 @@ const CardModal: CardModalType = ({
               target='_blank'
               rel='noopener noreferrer'
             >
-              <Tooltip
+              <IconTooltip
                 id='column_size_tooltip'
                 type='help'
                 text='Set the column size of the input'

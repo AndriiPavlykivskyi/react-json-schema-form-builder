@@ -1,8 +1,4 @@
-const repo = 'react-json-schema-form-builder'
-const assetPrefix = `/${repo}/`
-const basePath = `/${repo}`
+/** @type {import('next').NextConfig} */
+const nextConfig = {}
 
-module.exports = {
-  assetPrefix: assetPrefix,
-  basePath: basePath,
-}
+module.exports = nextConfig

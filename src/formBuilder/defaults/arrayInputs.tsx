@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from 'reactstrap';
 import {
   excludeKeys,
@@ -12,7 +12,6 @@ import shortAnswerInputs from './shortAnswerInputs';
 import longAnswerInputs from './longAnswerInputs';
 import numberInputs from './numberInputs';
 import defaultInputs from './defaultInputs';
-import { getRandomId } from '../utils';
 import type {
   FormInput,
   CardComponentType,
@@ -59,7 +58,7 @@ const CardArrayParameterInputs: CardComponentType = ({
 };
 
 const InnerCard: CardComponentType = ({ parameters, onChange, mods }) => {
-  const [elementId] = useState(getRandomId);
+  const elementId = React.useId();
   const newDataProps: { [key: string]: any } = {};
   const newUiProps: { [key: string]: any } = {};
   const allFormInputs = excludeKeys(
@@ -113,7 +112,7 @@ const InnerCard: CardComponentType = ({ parameters, onChange, mods }) => {
         }}
         isChecked={newDataProps.items.type === 'object'}
         label='Section'
-        id={`${elementId}_issection`}
+        id={`${elementId}issection`}
       />
       {generateElementComponentsFromSchemas({
         schemaData: { properties: { item: newDataProps.items } },

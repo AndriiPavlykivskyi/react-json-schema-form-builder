@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { Input } from 'reactstrap';
 import FBCheckbox from '../checkbox/FBCheckbox';
-import Tooltip from '../Tooltip';
-import { getRandomId } from '../utils';
+import IconTooltip from '../IconTooltip';
 import type { CardComponentType, FormInput, DataType } from '../types';
 import { PlaceholderInput } from '../inputs/PlaceholderInput';
 
@@ -46,7 +45,7 @@ const CardShortAnswerParameterInputs: CardComponentType = ({
   parameters,
   onChange,
 }) => {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   return (
     <div>
       <h4>Minimum Length</h4>
@@ -84,8 +83,8 @@ const CardShortAnswerParameterInputs: CardComponentType = ({
           target='_blank'
           rel='noopener noreferrer'
         >
-          <Tooltip
-            id={`${elementId}_regex`}
+          <IconTooltip
+            id={`${elementId}regex`}
             type='help'
             text='Regular expression pattern that this must satisfy'
           />
@@ -106,8 +105,8 @@ const CardShortAnswerParameterInputs: CardComponentType = ({
       />
       <h4>
         Format{' '}
-        <Tooltip
-          id={`${elementId}_format`}
+        <IconTooltip
+          id={`${elementId}format`}
           type='help'
           text='Require string input to match a certain common format'
         />
@@ -142,8 +141,8 @@ const CardShortAnswerParameterInputs: CardComponentType = ({
           target='_blank'
           rel='noopener noreferrer'
         >
-          <Tooltip
-            id={`${elementId}_autocomplete`}
+          <IconTooltip
+            id={`${elementId}autocomplete`}
             type='help'
             text="Suggest entries based on the user's browser history"
           />
@@ -188,8 +187,8 @@ const CardShortAnswerParameterInputs: CardComponentType = ({
           target='_blank'
           rel='noopener noreferrer'
         >
-          <Tooltip
-            id={`${elementId}_column_size`}
+          <IconTooltip
+            id={`${elementId}column_size`}
             type='help'
             text='Set the column size of the input'
           />

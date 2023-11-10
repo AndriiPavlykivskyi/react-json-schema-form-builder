@@ -2,13 +2,7 @@ import React, { ReactElement } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Select from 'react-select';
 import { createUseStyles } from 'react-jss';
-import {
-  Alert,
-  Input,
-  UncontrolledTooltip,
-  FormGroup,
-  FormFeedback,
-} from 'reactstrap';
+import { Alert, Input, FormGroup, FormFeedback } from 'reactstrap';
 import {
   faArrowUp,
   faArrowDown,
@@ -19,7 +13,7 @@ import FBCheckbox from './checkbox/FBCheckbox';
 import Collapse from './Collapse/Collapse';
 import CardModal from './CardModal';
 import { CardDefaultParameterInputs } from './defaults/defaultInputs';
-import Tooltip from './Tooltip';
+import { Tooltip } from '@mui/material';
 import Add from './Add';
 import Card from './Card';
 import {
@@ -31,8 +25,8 @@ import {
   onDragEnd,
 } from './utils';
 import FontAwesomeIcon from './FontAwesomeIcon';
-import { getRandomId } from './utils';
 import type { SectionPropsType } from './types';
+import IconTooltip from './IconTooltip';
 
 const useStyles = createUseStyles({
   sectionContainer: {
@@ -135,7 +129,7 @@ export default function Section({
   const [keyError, setKeyError] = React.useState<null | string>(null);
   // keep requirements in state to avoid rapid updates
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [elementId] = React.useState(getRandomId());
+  const elementId = React.useId();
   const addProperties = {
     schema,
     uischema,
@@ -158,40 +152,28 @@ export default function Section({
             <span onClick={() => setCardOpen(!cardOpen)} className='label'>
               {schemaData.title || keyName}{' '}
               {parent ? (
-                <Tooltip
-                  text={`Depends on ${parent}`}
-                  id={`${elementId}_parentinfo`}
-                  type='alert'
-                />
+                <IconTooltip text={`Depends on ${parent}`} type='alert' />
               ) : (
                 ''
               )}
             </span>
             <span className='arrows'>
-              <span id={`${elementId}_moveupbiginfo`}>
-                <FontAwesomeIcon
-                  icon={faArrowUp}
-                  onClick={() => (onMoveUp ? onMoveUp() : {})}
-                />
-              </span>
-              <UncontrolledTooltip
-                placement='top'
-                target={`${elementId}_moveupbiginfo`}
-              >
-                Move form element up
-              </UncontrolledTooltip>
-              <span id={`${elementId}_movedownbiginfo`}>
-                <FontAwesomeIcon
-                  icon={faArrowDown}
-                  onClick={() => (onMoveDown ? onMoveDown() : {})}
-                />
-              </span>
-              <UncontrolledTooltip
-                placement='top'
-                target={`${elementId}_movedownbiginfo`}
-              >
-                Move form element down
-              </UncontrolledTooltip>
+              <Tooltip placement='top' title={`Move form element up`}>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    onClick={() => (onMoveUp ? onMoveUp() : {})}
+                  />
+                </span>
+              </Tooltip>
+              <Tooltip placement='top' title={`Move form element down`}>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faArrowDown}
+                    onClick={() => (onMoveDown ? onMoveDown() : {})}
+                  />
+                </span>
+              </Tooltip>
             </span>
           </React.Fragment>
         }
@@ -228,7 +210,7 @@ export default function Section({
             <div className='section-entry' data-test='section-object-name'>
               <h5>
                 Section Object Name{' '}
-                <Tooltip
+                <IconTooltip
                   text={
                     mods &&
                     mods.tooltipDescriptions &&
@@ -238,7 +220,6 @@ export default function Section({
                       ? mods.tooltipDescriptions.cardSectionObjectName
                       : 'The key to the object that will represent this form section.'
                   }
-                  id={`${elementId}_nameinfo`}
                   type='help'
                 />
               </h5>
@@ -272,7 +253,7 @@ export default function Section({
             <div className='section-entry' data-test='section-display-name'>
               <h5>
                 Section Display Name{' '}
-                <Tooltip
+                <IconTooltip
                   text={
                     mods &&
                     mods.tooltipDescriptions &&
@@ -282,7 +263,6 @@ export default function Section({
                       ? mods.tooltipDescriptions.cardSectionDisplayName
                       : 'The name of the form section that will be shown to users of the form.'
                   }
-                  id={`${elementId}_titleinfo`}
                   type='help'
                 />
               </h5>
@@ -305,7 +285,7 @@ export default function Section({
             <div className='section-entry' data-test='section-description'>
               <h5>
                 Section Description{' '}
-                <Tooltip
+                <IconTooltip
                   text={
                     mods &&
                     mods.tooltipDescriptions &&
@@ -315,7 +295,6 @@ export default function Section({
                       ? mods.tooltipDescriptions.cardSectionDescription
                       : 'A description of the section which will be visible on the form.'
                   }
-                  id={`${elementId}_descriptioninfo`}
                   type='help'
                 />
               </h5>
@@ -343,7 +322,7 @@ export default function Section({
             >
               <h5>Unsupported Features:</h5>
               {unsupportedFeatures.map((message) => (
-                <li key={`${elementId}_${message}`}>{message}</li>
+                <li key={`${elementId}${message}`}>{message}</li>
               ))}
             </Alert>
           </div>
@@ -424,35 +403,26 @@ export default function Section({
             )}
           </div>
           <div className='section-interactions'>
-            <span id={`${elementId}_editinfo`}>
+            <Tooltip
+              placement='top'
+              title={`Additional configurations for this form element`}
+            >
               <FontAwesomeIcon
                 icon={faPencilAlt}
                 onClick={() => setModalOpen(true)}
               />
-            </span>
-            <UncontrolledTooltip
-              placement='top'
-              target={`${elementId}_editinfo`}
-            >
-              Additional configurations for this form element
-            </UncontrolledTooltip>
-            <span id={`${elementId}_trashinfo`}>
+            </Tooltip>
+            <Tooltip placement='top' title={`Delete form element`}>
               <FontAwesomeIcon
                 icon={faTrash}
                 onClick={() => (onDelete ? onDelete() : {})}
               />
-            </span>
-            <UncontrolledTooltip
-              placement='top'
-              target={`${elementId}_trashinfo`}
-            >
-              Delete form element
-            </UncontrolledTooltip>
+            </Tooltip>
             <FBCheckbox
               onChangeValue={() => onRequireToggle()}
               isChecked={required}
               label='Required'
-              id={`${elementId}_required`}
+              id={`${elementId}required`}
             />
           </div>
         </div>

@@ -3,7 +3,6 @@ import { Input } from 'reactstrap';
 import { createUseStyles } from 'react-jss';
 import FBCheckbox from '../checkbox/FBCheckbox';
 import CardEnumOptions from '../CardEnumOptions';
-import { getRandomId } from '../utils';
 import type {
   FormInput,
   CardComponentType,
@@ -85,7 +84,7 @@ function MultipleChoice({
   const [isNumber, setIsNumber] = React.useState(
     !!enumArray.length && !containsString,
   );
-  const [elementId] = React.useState(getRandomId());
+  const elementId = React.useId();
   return (
     <div className='card-enum'>
       <h3>Possible Values</h3>
@@ -107,7 +106,7 @@ function MultipleChoice({
         }}
         isChecked={Array.isArray(parameters.enumNames)}
         label='Display label is different from value'
-        id={`${elementId}_different`}
+        id={`${elementId}different`}
       />
       <div
         className={
@@ -148,7 +147,7 @@ function MultipleChoice({
           isChecked={isNumber}
           disabled={containsUnparsableString}
           label='Force number'
-          id={`${elementId}_forceNumber`}
+          id={`${elementId}forceNumber`}
         />
       </div>
       <CardEnumOptions

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from 'reactstrap';
 import FBCheckbox from '../checkbox/FBCheckbox';
-import Tooltip from '../Tooltip';
-import { getRandomId } from '../utils';
+import IconTooltip from '../IconTooltip';
 import type { FormInput, CardComponentType } from '../types';
 
 // specify the inputs required for a number type object
@@ -10,13 +9,13 @@ const CardNumberParameterInputs: CardComponentType = ({
   parameters,
   onChange,
 }) => {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   return (
     <div>
       <h4>
         Multiple of{' '}
-        <Tooltip
-          id={`${elementId}_multiple`}
+        <IconTooltip
+          id={`${elementId}multiple`}
           type='help'
           text='Require number to be a multiple of this number'
         />

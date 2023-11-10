@@ -1,4 +1,5 @@
 import ts from 'rollup-plugin-ts';
+import css from 'rollup-plugin-import-css';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -22,6 +23,7 @@ export default {
     'react-select',
     '@fortawesome/free-solid-svg-icons',
     '@fortawesome/react-fontawesome',
+    '@mui/material',
   ],
-  plugins: [ts()],
+  plugins: [ts(), css({ output: 'index.css' })],
 };

@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import { UncontrolledTooltip } from 'reactstrap';
 import { createUseStyles } from 'react-jss';
 import {
   faArrowUp,
@@ -13,8 +12,7 @@ import CardModal from './CardModal';
 import CardGeneralParameterInputs from './CardGeneralParameterInputs';
 import Add from './Add';
 import FontAwesomeIcon from './FontAwesomeIcon';
-import Tooltip from './Tooltip';
-import { getRandomId } from './utils';
+import { Tooltip } from '@mui/material';
 import type { CardPropsType, CardComponentPropsType } from './types';
 
 const useStyles = createUseStyles({
@@ -114,7 +112,7 @@ export default function Card({
 }: CardPropsType): ReactElement {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [elementId] = React.useState(getRandomId());
+  const elementId = React.useId();
 
   return (
     <React.Fragment>
@@ -123,52 +121,34 @@ export default function Card({
         toggleCollapse={() => setCardOpen(!cardOpen)}
         title={
           <React.Fragment>
-            <span onClick={() => setCardOpen(!cardOpen)} className='label'>
-              {componentProps.title || componentProps.name}{' '}
-              {componentProps.parent ? (
-                <Tooltip
-                  text={`Depends on ${componentProps.parent}`}
-                  id={`${elementId}_parentinfo`}
-                  type='alert'
-                />
-              ) : (
-                ''
-              )}
-              {componentProps.$ref !== undefined ? (
-                <Tooltip
-                  text={`Is an instance of pre-configured component ${componentProps.$ref}`}
-                  id={`${elementId}_refinfo`}
-                  type='alert'
-                />
-              ) : (
-                ''
-              )}
-            </span>
+            <Tooltip
+              title={
+                componentProps.parent
+                  ? `Depends on ${componentProps.parent}`
+                  : `Is an instance of pre-configured component ${componentProps.$ref}`
+              }
+            >
+              <span onClick={() => setCardOpen(!cardOpen)} className='label'>
+                {componentProps.title || componentProps.name}{' '}
+              </span>
+            </Tooltip>
             <span className='arrows'>
-              <span id={`${elementId}_moveupbiginfo`}>
-                <FontAwesomeIcon
-                  icon={faArrowUp}
-                  onClick={() => (onMoveUp ? onMoveUp() : {})}
-                />
-              </span>
-              <UncontrolledTooltip
-                placement='top'
-                target={`${elementId}_moveupbiginfo`}
-              >
-                Move form element up
-              </UncontrolledTooltip>
-              <span id={`${elementId}_movedownbiginfo`}>
-                <FontAwesomeIcon
-                  icon={faArrowDown}
-                  onClick={() => (onMoveDown ? onMoveDown() : {})}
-                />
-              </span>
-              <UncontrolledTooltip
-                placement='top'
-                target={`${elementId}_movedownbiginfo`}
-              >
-                Move form element down
-              </UncontrolledTooltip>
+              <Tooltip placement='top' title={`Move form element up`}>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    onClick={() => (onMoveUp ? onMoveUp() : {})}
+                  />
+                </span>
+              </Tooltip>
+              <Tooltip placement='top' title={`Move form element down`}>
+                <span>
+                  <FontAwesomeIcon
+                    icon={faArrowDown}
+                    onClick={() => (onMoveDown ? onMoveDown() : {})}
+                  />
+                </span>
+              </Tooltip>
             </span>
           </React.Fragment>
         }
@@ -186,27 +166,25 @@ export default function Card({
           />
         </div>
         <div className={classes.cardInteractions}>
-          <span id={`${elementId}_editinfo`}>
-            <FontAwesomeIcon
-              icon={faPencilAlt}
-              onClick={() => setModalOpen(true)}
-            />
-          </span>
-          <UncontrolledTooltip placement='top' target={`${elementId}_editinfo`}>
-            Additional configurations for this form element
-          </UncontrolledTooltip>
-          <span id={`${elementId}_trashinfo`}>
-            <FontAwesomeIcon
-              icon={faTrash}
-              onClick={() => onDelete && onDelete()}
-            />
-          </span>
-          <UncontrolledTooltip
+          <Tooltip
             placement='top'
-            target={`${elementId}_trashinfo`}
+            title={`Additional configurations for this form element`}
           >
-            Delete form element
-          </UncontrolledTooltip>
+            <span>
+              <FontAwesomeIcon
+                icon={faPencilAlt}
+                onClick={() => setModalOpen(true)}
+              />
+            </span>
+          </Tooltip>
+          <Tooltip placement='top' title={`Delete form element`}>
+            <span>
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={() => onDelete && onDelete()}
+              />
+            </span>
+          </Tooltip>
           <FBCheckbox
             onChangeValue={() =>
               onChange({
@@ -216,7 +194,7 @@ export default function Card({
             }
             isChecked={!!componentProps.required}
             label='Required'
-            id={`${elementId}_required`}
+            id={`${elementId}required`}
           />
         </div>
         <CardModal

@@ -9,7 +9,6 @@ import {
   categoryToNameMap,
   categoryType,
   subtractArray,
-  getRandomId,
 } from './utils';
 import type {
   Mods,
@@ -17,7 +16,7 @@ import type {
   FormInput,
   CardComponentPropsType,
 } from './types';
-import Tooltip from './Tooltip';
+import IconTooltip from './IconTooltip';
 
 // specify the inputs required for any type of object
 export default function CardGeneralParameterInputs({
@@ -39,7 +38,7 @@ export default function CardGeneralParameterInputs({
   const [descriptionState, setDescriptionState] = React.useState(
     parameters.description,
   );
-  const [elementId] = React.useState(getRandomId());
+  const elementId = React.useId();
   const categoryMap = categoryToNameMap(allFormInputs);
 
   const fetchLabel = (
@@ -82,7 +81,7 @@ export default function CardGeneralParameterInputs({
           <div className='card-entry'>
             <h5>
               {`${objectNameLabel} `}
-              <Tooltip
+              <IconTooltip
                 text={
                   mods &&
                   mods.tooltipDescriptions &&
@@ -90,7 +89,7 @@ export default function CardGeneralParameterInputs({
                     ? mods.tooltipDescriptions.cardObjectName
                     : 'The back-end name of the object'
                 }
-                id={`${elementId}_nameinfo`}
+                id={`${elementId}nameinfo`}
                 type='help'
               />
             </h5>
@@ -135,7 +134,7 @@ export default function CardGeneralParameterInputs({
         >
           <h5>
             {`${displayNameLabel} `}
-            <Tooltip
+            <IconTooltip
               text={
                 mods &&
                 mods.tooltipDescriptions &&
@@ -165,7 +164,7 @@ export default function CardGeneralParameterInputs({
         >
           <h5>
             {`${descriptionLabel} `}
-            <Tooltip
+            <IconTooltip
               text={
                 mods &&
                 mods.tooltipDescriptions &&
@@ -197,7 +196,7 @@ export default function CardGeneralParameterInputs({
         >
           <h5>
             {`${inputTypeLabel} `}
-            <Tooltip
+            <IconTooltip
               text={
                 mods &&
                 mods.tooltipDescriptions &&

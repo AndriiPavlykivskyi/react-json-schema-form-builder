@@ -5,7 +5,6 @@ import CardEnumOptions from '../CardEnumOptions';
 import CardSelector from './CardSelector';
 import FBCheckbox from '../checkbox/FBCheckbox';
 import FontAwesomeIcon from '../FontAwesomeIcon';
-import { getRandomId } from '../utils';
 
 type combinationValue = string | number | any[] | { [key: string]: any };
 
@@ -30,7 +29,7 @@ export default function ValueSelector({
   parentSchema?: any;
   path: string;
 }): ReactElement {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   if (possibility.value) {
     // enum type
     if (parentEnums) {
@@ -216,7 +215,7 @@ export default function ValueSelector({
       return (
         <div>
           {enumArr.map((combination, index) => (
-            <li key={`${elementId}_possibleValue${index}`}>
+            <li key={`${elementId}possibleValue${index}`}>
               {Object.keys(combination).map((key) => {
                 const val: combinationValue = combination[key];
                 return (

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import type { CardComponentType } from '../types';
-import { getRandomId } from '../utils';
-import Tooltip from '../Tooltip';
+import IconTooltip from '../IconTooltip';
 import { Input } from 'reactstrap';
 
 export const PlaceholderInput: CardComponentType = ({
   parameters,
   onChange,
 }) => {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   return (
     <React.Fragment>
       <h4>
@@ -18,8 +17,8 @@ export const PlaceholderInput: CardComponentType = ({
           target='_blank'
           rel='noopener noreferrer'
         >
-          <Tooltip
-            id={`${elementId}_placeholder`}
+          <IconTooltip
+            id={`${elementId}placeholder`}
             type='help'
             text='Hint to the user as to what kind of information is expected in the field'
           />

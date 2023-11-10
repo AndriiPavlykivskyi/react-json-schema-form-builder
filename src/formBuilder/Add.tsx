@@ -1,16 +1,17 @@
-import React, { useState, ReactElement } from 'react';
+import React, { useState } from 'react';
 import {
-  Popover,
-  PopoverHeader,
-  PopoverBody,
-  UncontrolledTooltip,
+  Box,
   Button,
-} from 'reactstrap';
+  IconButton,
+  Popover,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { createUseStyles } from 'react-jss';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import FontAwesomeIcon from './FontAwesomeIcon';
 import FBRadioGroup from './radio/FBRadioGroup';
-import { getRandomId } from './utils';
 import type { ModLabels } from './types';
 
 const useStyles = createUseStyles({
@@ -42,67 +43,77 @@ export default function Add({
   hidden?: boolean;
   tooltipDescription?: string;
   labels?: ModLabels;
-}): ReactElement {
+}) {
   const classes = useStyles();
-  const [popoverOpen, setPopoverOpen] = useState(false);
   const [createChoice, setCreateChoice] = useState('card');
-  const [elementId] = useState(getRandomId());
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null,
+  );
+
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div style={{ display: hidden ? 'none' : 'initial' }}>
-      <span id={`${elementId}_add`}>
-        <FontAwesomeIcon
-          icon={faPlusSquare}
-          onClick={() => setPopoverOpen(true)}
-        />
-      </span>
-      <UncontrolledTooltip placement='top' target={`${elementId}_add`}>
-        {tooltipDescription || 'Create new form element'}
-      </UncontrolledTooltip>
+    <>
+      <div style={{ display: hidden ? 'none' : 'initial' }}>
+        <Tooltip
+          placement='top'
+          title={tooltipDescription || 'Create new form element'}
+        >
+          <IconButton onClick={handleOpen}>
+            <FontAwesomeIcon icon={faPlusSquare} />
+          </IconButton>
+        </Tooltip>
+      </div>
       <Popover
-        placement='bottom'
-        target={`${elementId}_add`}
-        isOpen={popoverOpen}
-        toggle={() => setPopoverOpen(false)}
+        open={open}
+        id={id}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
         className={`add-details ${classes.addDetails}`}
-        id={`${elementId}_add_popover`}
       >
-        <PopoverHeader>Create New</PopoverHeader>
-        <PopoverBody>
-          <FBRadioGroup
-            className='choose-create'
-            defaultValue={createChoice}
-            horizontal={false}
-            options={[
-              {
-                value: 'card',
-                label: labels?.addElementLabel ?? 'Form element',
-              },
-              {
-                value: 'section',
-                label: labels?.addSectionLabel ?? 'Form section',
-              },
-            ]}
-            onChange={(selection) => {
-              setCreateChoice(selection);
-            }}
-          />
-          <div className='action-buttons'>
-            <Button onClick={() => setPopoverOpen(false)} color='secondary'>
-              Cancel
-            </Button>
-            <Button
-              onClick={() => {
-                addElem(createChoice);
-                setPopoverOpen(false);
+        <Box p={1}>
+          <Stack spacing={1}>
+            <Typography variant='h5'>Create New</Typography>
+            <FBRadioGroup
+              className='choose-create'
+              defaultValue={createChoice}
+              horizontal={false}
+              options={[
+                {
+                  value: 'card',
+                  label: labels?.addElementLabel ?? 'Form element',
+                },
+                {
+                  value: 'section',
+                  label: labels?.addSectionLabel ?? 'Form section',
+                },
+              ]}
+              onChange={(selection) => {
+                setCreateChoice(selection);
               }}
-              color='primary'
-            >
-              Create
-            </Button>
-          </div>
-        </PopoverBody>
+            />
+            <div className='action-buttons'>
+              <Button onClick={() => setAnchorEl(null)} color='secondary'>
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  addElem(createChoice);
+                  setAnchorEl(null);
+                }}
+                color='primary'
+              >
+                Create
+              </Button>
+            </div>
+          </Stack>
+        </Box>
       </Popover>
-    </div>
+    </>
   );
 }

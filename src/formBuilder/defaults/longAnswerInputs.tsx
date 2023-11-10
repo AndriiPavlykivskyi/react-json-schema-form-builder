@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from 'reactstrap';
 import FBCheckbox from '../checkbox/FBCheckbox';
-import Tooltip from '../Tooltip';
-import { getRandomId } from '../utils';
+import IconTooltip from '../IconTooltip';
 import type { FormInput, CardComponentType } from '../types';
 import { PlaceholderInput } from '../inputs/PlaceholderInput';
 
@@ -11,7 +10,7 @@ const CardLongAnswerParameterInputs: CardComponentType = ({
   parameters,
   onChange,
 }) => {
-  const [elementId] = useState(getRandomId());
+  const elementId = React.useId();
   return (
     <div>
       <h4>Minimum Length</h4>
@@ -45,8 +44,8 @@ const CardLongAnswerParameterInputs: CardComponentType = ({
       <h4>
         Regular Expression Pattern{' '}
         <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions'>
-          <Tooltip
-            id={`${elementId}_regex`}
+          <IconTooltip
+            id={`${elementId}regex`}
             type='help'
             text='Regular expression pattern that this must satisfy'
           />
