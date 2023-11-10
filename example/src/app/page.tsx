@@ -9,8 +9,6 @@ import {
 } from '@AndriiPavlykivskyi/react-json-schema-form-builder';
 import validator from '@rjsf/validator-ajv8';
 
-import '@AndriiPavlykivskyi/react-json-schema-form-builder/dist/index.css';
-
 export default function Home() {
   const [schema, setSchema] = useState('');
   const [uiSchema, setUiSchema] = useState('');

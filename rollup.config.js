@@ -1,5 +1,5 @@
 import ts from 'rollup-plugin-ts';
-import css from 'rollup-plugin-import-css';
+import postcss from 'rollup-plugin-postcss';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -29,5 +29,11 @@ export default {
     'i18next',
     'react-i18next',
   ],
-  plugins: [ts(), css({ output: 'index.css' })],
+  plugins: [
+    ts(),
+    postcss({
+      extensions: ['.css'],
+      minimize: true,
+    }),
+  ],
 };

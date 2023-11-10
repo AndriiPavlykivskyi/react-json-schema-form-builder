@@ -1,4 +1,3 @@
-'use client';
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Alert, Input } from 'reactstrap';
@@ -136,7 +135,7 @@ const useStyles = createUseStyles({
     },
   },
   formHead: {
-    display: 'block',
+    display: 'flex',
     margin: '0 auto',
     'background-color': '#EBEBEB',
     border: '1px solid #858F96',
@@ -144,7 +143,7 @@ const useStyles = createUseStyles({
     width: '100%',
     padding: '10px',
     '& div': {
-      width: '30%',
+      flexBasis: '50%',
       display: 'inline-block',
       'text-align': 'left',
       padding: '10px',
@@ -180,6 +179,9 @@ const useStyles = createUseStyles({
     },
   },
   formFooter: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
     marginTop: '1em',
     textAlign: 'center',
     '& .fa': { cursor: 'pointer', color: '$green', fontSize: '1.5em' },

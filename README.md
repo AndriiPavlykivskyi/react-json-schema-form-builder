@@ -24,7 +24,7 @@ More extensive documentation is available [here](https://react-json-schema-form-
 npm i --save @AndriiPavlykivskyi/react-json-schema-form-builder
 ```
 
-Import the tool as a react component and its styles in your Node project:
+Import the tool as a react component in your Node project:
 
 ## Usage
 
@@ -32,7 +32,6 @@ Import the tool as a react component and its styles in your Node project:
 import React, { Component } from 'react';
  
 import {FormBuilder} from '@AndriiPavlykivskyi/react-json-schema-form-builder';
-import '@AndriiPavlykivskyi/react-json-schema-form-builder/dist/index.css';
  
 class Example extends Component {
   constructor(props) {
