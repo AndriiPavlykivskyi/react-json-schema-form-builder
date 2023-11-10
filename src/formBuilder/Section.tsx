@@ -388,9 +388,6 @@ export default function Section({
               mods.components.add(addProperties)}
             {!mods?.components?.add && (
               <Add
-                tooltipDescription={
-                  ((mods || {}).tooltipDescriptions || {}).add
-                }
                 addElem={(choice: string) => {
                   if (choice === 'card') {
                     addCardObj(addProperties);
@@ -451,7 +448,6 @@ export default function Section({
       {mods?.components?.add && mods.components.add(parentProperties)}
       {!mods?.components?.add && (
         <Add
-          tooltipDescription={((mods || {}).tooltipDescriptions || {}).add}
           addElem={(choice: string) => {
             if (choice === 'card') {
               addCardObj(parentProperties);

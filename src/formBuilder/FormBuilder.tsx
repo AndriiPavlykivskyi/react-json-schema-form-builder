@@ -50,7 +50,7 @@ const useStyles = createUseStyles({
         border: '1px solid green',
       },
       display: 'block',
-      width: '70%',
+      width: '100%',
       'min-width': '400px',
       margin: '2em auto',
       border: '1px solid gray',
@@ -141,7 +141,7 @@ const useStyles = createUseStyles({
     'background-color': '#EBEBEB',
     border: '1px solid #858F96',
     'border-radius': '4px',
-    width: '70%',
+    width: '100%',
     padding: '10px',
     '& div': {
       width: '30%',
@@ -186,6 +186,18 @@ const useStyles = createUseStyles({
   },
 });
 
+export type FormBuilderProps = {
+  schema: string;
+  uischema: string;
+  onMount?: (parameters: InitParameters) => any;
+  onChange: (schema: string, uischema: string) => any;
+  mods?: Mods;
+  className?: string;
+};
+
+/**
+ * Visual JSON Schema Editor
+ */
 export default function FormBuilder({
   schema,
   uischema,
@@ -193,14 +205,7 @@ export default function FormBuilder({
   onChange,
   mods,
   className,
-}: {
-  schema: string;
-  uischema: string;
-  onMount?: (parameters: InitParameters) => any;
-  onChange: (schema: string, uischema: string) => any;
-  mods?: Mods;
-  className?: string;
-}) {
+}: FormBuilderProps) {
   const classes = useStyles();
   const schemaData = parse(schema);
   schemaData.type = 'object';
@@ -386,7 +391,6 @@ export default function FormBuilder({
           mods.components.add(addProperties)}
         {!mods?.components?.add && (
           <Add
-            tooltipDescription={((mods || {}).tooltipDescriptions || {}).add}
             labels={mods?.labels ?? {}}
             addElem={(choice: string) => {
               if (choice === 'card') {

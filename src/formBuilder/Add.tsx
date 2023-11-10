@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
+  DialogActions,
   IconButton,
   Popover,
   Stack,
@@ -13,6 +14,7 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import FontAwesomeIcon from './FontAwesomeIcon';
 import FBRadioGroup from './radio/FBRadioGroup';
 import type { ModLabels } from './types';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createUseStyles({
   addDetails: {
@@ -36,14 +38,14 @@ const useStyles = createUseStyles({
 export default function Add({
   addElem,
   hidden,
-  tooltipDescription,
   labels,
 }: {
   addElem: (choice: string) => void;
   hidden?: boolean;
-  tooltipDescription?: string;
   labels?: ModLabels;
 }) {
+  const { t } = useTranslation();
+
   const classes = useStyles();
   const [createChoice, setCreateChoice] = useState('card');
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -60,10 +62,7 @@ export default function Add({
   return (
     <>
       <div style={{ display: hidden ? 'none' : 'initial' }}>
-        <Tooltip
-          placement='top'
-          title={tooltipDescription || 'Create new form element'}
-        >
+        <Tooltip placement='top' title={t`addTooltip`}>
           <IconButton onClick={handleOpen}>
             <FontAwesomeIcon icon={faPlusSquare} />
           </IconButton>
@@ -78,7 +77,9 @@ export default function Add({
       >
         <Box p={1}>
           <Stack spacing={1}>
-            <Typography variant='h5'>Create New</Typography>
+            <Typography variant='h5' fontWeight={500}>
+              Create New
+            </Typography>
             <FBRadioGroup
               className='choose-create'
               defaultValue={createChoice}
@@ -97,8 +98,12 @@ export default function Add({
                 setCreateChoice(selection);
               }}
             />
-            <div className='action-buttons'>
-              <Button onClick={() => setAnchorEl(null)} color='secondary'>
+            <DialogActions>
+              <Button
+                onClick={() => setAnchorEl(null)}
+                color='secondary'
+                variant='outlined'
+              >
                 Cancel
               </Button>
               <Button
@@ -107,10 +112,11 @@ export default function Add({
                   setAnchorEl(null);
                 }}
                 color='primary'
+                variant='contained'
               >
                 Create
               </Button>
-            </div>
+            </DialogActions>
           </Stack>
         </Box>
       </Popover>

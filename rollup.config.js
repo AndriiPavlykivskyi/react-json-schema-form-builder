@@ -24,6 +24,10 @@ export default {
     '@fortawesome/free-solid-svg-icons',
     '@fortawesome/react-fontawesome',
     '@mui/material',
+    '@emotion/react',
+    '@emotion/styled',
+    'i18next',
+    'react-i18next',
   ],
   plugins: [ts(), css({ output: 'index.css' })],
 };

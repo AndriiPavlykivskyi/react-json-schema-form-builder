@@ -108,7 +108,6 @@ export default function CardGallery({
           mods.components.add(addProperties)}
         {!mods?.components?.add && (
           <Add
-            tooltipDescription={((mods || {}).tooltipDescriptions || {}).add}
             addElem={(choice: string) => {
               if (choice === 'card') {
                 addCardObj(addProperties);

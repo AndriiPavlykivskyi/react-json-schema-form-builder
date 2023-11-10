@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Modal,
-  ModalHeader,
-  Button,
-  ModalBody,
-  ModalFooter,
-  Input,
-} from 'reactstrap';
+import { ModalHeader, ModalBody, Input } from 'reactstrap';
 import { createUseStyles } from 'react-jss';
 import DependencyField from './dependencies/DependencyField';
 import type { CardModalType, CardComponentPropsType } from './types';
 import IconTooltip from './IconTooltip';
+import { Button, Dialog, DialogActions } from '@mui/material';
 
 const useStyles = createUseStyles({
   cardModal: {
@@ -51,7 +45,13 @@ const CardModal: CardModalType = ({
   }, [componentProps]);
 
   return (
-    <Modal isOpen={isOpen} data-test='card-modal' className={classes.cardModal}>
+    <Dialog
+      fullWidth
+      maxWidth='md'
+      open={isOpen}
+      onClose={() => onClose()}
+      className={classes.cardModal}
+    >
       <ModalHeader className='card-modal-header'>
         <div style={{ display: componentProps.hideKey ? 'none' : 'initial' }}>
           <h3>Additional Settings</h3>
@@ -111,12 +111,13 @@ const CardModal: CardModalType = ({
           }}
         />
       </ModalBody>
-      <ModalFooter>
+      <DialogActions>
         <Button
           onClick={() => {
             onClose();
             onChange(componentPropsState);
           }}
+          variant='contained'
           color='primary'
         >
           Save
@@ -126,12 +127,13 @@ const CardModal: CardModalType = ({
             onClose();
             setComponentProps(componentProps);
           }}
+          variant='outlined'
           color='secondary'
         >
           Cancel
         </Button>
-      </ModalFooter>
-    </Modal>
+      </DialogActions>
+    </Dialog>
   );
 };
 

@@ -12,5 +12,5 @@
     "baseUrl": ".",
     "noEmit": true,
   },
-  "include": ["src/**.ts"]
+  "include": ["src/**.ts", "src/i18n/index.ts"]
 }
